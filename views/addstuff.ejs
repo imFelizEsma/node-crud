@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-        <h1>Agregar Usuario</h1>
+        <h1>Agregar Piezas</h1>
         <form
             id="add-form"
             action="/add"
@@ -12,35 +12,55 @@
             enctype="multipart/form-data"
         >
             <div class="mb-3">
+            <label class="form-label" for="code">Codigo</label>
+            <input
+                class="form-control"
+                id="code"
+                name="code"
+                type="text"
+                placeholder="Codigo"
+            />
+            </div>
+            <div class="mb-3">
             <label class="form-label" for="name">Nombre</label>
             <input
                 class="form-control"
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Name"
+                placeholder="Nombre"
             />
             </div>
             <div class="mb-3">
-            <label class="form-label" for="email">Nombre</label>
+            <label class="form-label" for="description">Descripcion</label>
             <input
                 class="form-control"
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Email Address"
+                id="description"
+                name="description"
+                type="text"
+                placeholder="Descripcion"
             />
             </div>
             <div class="mb-3">
-            <label class="form-label" for="phone">Nombre</label>
+            <label class="form-label" for="amount">Cantidad disponible en Almacen</label>
             <input
                 class="form-control"
-                id="phone"
-                name="phone"
-                type="phone"
-                placeholder="Phone"
+                id="amount"
+                name="amount"
+                type="text"
+                placeholder="Cantidad"
             />
             </div>
+            <div class="mb-3">
+                <label class="form-label" for="price">Precio</label>
+                <input
+                    class="form-control"
+                    id="price"
+                    name="price"
+                    type="text"
+                    placeholder="Precio"
+                />
+                </div>
             <div class="mb-3">
             <label class="form-label">Foto</label>
             <input name="image" class="form-control" type="file" required />
@@ -49,7 +69,7 @@
             <input
                 type="submit"
                 class="btn btn-primary btn-lg"
-                value="Add User"
+                value="Añadir Pieza"
             />
             </div>
         </form>

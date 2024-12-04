@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users');
+const Stuff = require('../models/stuff');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -22,8 +22,8 @@ var upload = multer({ storage: storage }).single('image');
 // Routes
 router.get('/', async (req, res) => {
     try{
-        const users = await User.find({});
-        res.render('index', {titulo: 'Inicio', users: users});
+        const stuffs = await Stuff.find({});
+        res.render('index', {titulo: 'Inicio', stuffs: stuffs});
     } 
     catch (err){
         res.json({message: err.message});
@@ -31,22 +31,24 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/add', (req, res) => {
-    res.render('adduser', {titulo: 'Agregar Usuario'});
+    res.render('addstuff', {titulo: 'Agregar Piezas'});
 });
 
-// Add user
+// Add stuff
 router.post('/add', upload, (req, res) => {
-    const user = new User({
+    const stuff = new Stuff({
+        code: req.body.code,
         name: req.body.name,
-        email: req.body.email,
-        phone: req.body.phone,
+        description: req.body.description,
+        amount: req.body.amount,
+        price: req.body.price,
         image: req.file.filename
     });
 
-    user.save().then(() => {
+    stuff.save().then(() => {
         req.session.message = {
             type: 'success',
-            message: 'Usuario agregado correctamente!'
+            message: 'Pieza agregada correctamente!'
         };
 
         res.redirect('/');
@@ -63,12 +65,12 @@ router.get('/edit/:id', async (req, res) => {
     const id = req.params.id;
 
     try{
-        const user = await User.findById(id);
+        const stuff = await Stuff.findById(id);
 
-        if(user == null) {
+        if(stuff == null) {
             res.redirect('/');
         }else{
-            res.render('edituser', {titulo: 'Editar Usuario', user: user});
+            res.render('editstuff', {titulo: 'Editar Piezas', stuff: stuff});
         }
     } catch (err){
         res.status(500).send(err);
@@ -92,16 +94,18 @@ router.post('/update/:id', upload, async (req, res) => {
     }
 
     try{
-        await User.findByIdAndUpdate(id, {
+        await Stuff.findByIdAndUpdate(id, {
+            code: req.body.code,
             name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
+            description: req.body.description,
+            amount: req.body.amount,
+            price: req.body.price,
             image: new_image
         });
 
         req.session.message = {
             type: 'success',
-            message: 'Usuario agregado correctamente!'
+            message: 'Pieza agregada correctamente!'
         };
 
         res.redirect('/');
@@ -113,14 +117,14 @@ router.post('/update/:id', upload, async (req, res) => {
     }
 }); 
 
-// Delete user
+// Delete stuff
 router.get('/delete/:id', async (req, res) => {
     const id = req.params.id;
 
     try{
-        const user = await User.findByIdAndDelete(id);
+        const stuff = await Stuff.findByIdAndDelete(id);
 
-        if(user != null && user.image != ''){
+        if(stuff != null && stuff.image != ''){
             try{
                 fs.unlinkSync('./upload/' + resourceLimits.image);
             } catch (err){
@@ -130,7 +134,7 @@ router.get('/delete/:id', async (req, res) => {
 
         req.session.message = {
             type: 'info',
-            message: 'Usuario eliminado correctamente!'
+            message: 'Pieza eliminada correctamente!'
         };
 
         res.redirect('/');

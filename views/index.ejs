@@ -11,30 +11,34 @@
           </strong>
         </div>
       <% } %>
-      <h1 class="text-center">Lista de Usuarios</h1>
+      <h1 class="text-center">Lista de Piezas</h1>
       <div class="table-responsive">
         <table class="table table-striped text-center">
           <thead>
-            <tr class="table-dark">
+            <tr class="table-dark align-middle">
               <th>ID</th>
+              <th>Code</th>
               <th>Imagen</th>
               <th>Nombre</th>
-              <th>Email</th>
-              <th>Telefono</th>
+              <th>Descripcion</th>
+              <th>Cantidad en Alm</th>
+              <th>Precio</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <% users.forEach((user, index) => { %>
+            <% stuffs.forEach((stuff, index) => { %>
             <tr class="align-middle">
               <td><%= ++index %></td>
-              <td><img src="<%= user.image %>" width="50" class="img-thumbnail"></td>
-              <td><%= user.name %></td>
-              <td><%= user.email %></td>
-              <td><%= user.phone %></td>
+              <td><%= stuff.code %></td>
+              <td><img src="<%= stuff.image %>" width="50" class="img-thumbnail"></td>
+              <td><%= stuff.name %></td>
+              <td><%= stuff.description %></td>
+              <td><%= stuff.amount %></td>
+              <td><%= stuff.price %></td>
               <td>
-                <a href="/edit/<%= user._id %>"><i class="fa fa-pen-to-square fa-lg"></i></a>
-                <a href="/delete/<%= user._id %>"><i class="fa-solid fa-trash"></i></a>
+                <a href="/edit/<%= stuff._id %>"><i class="fa fa-pen-to-square fa-lg"></i></a>
+                <a href="/delete/<%= stuff._id %>"><i class="fa-solid fa-trash"></i></a>
               </td>
             </tr>
             <% }); %>

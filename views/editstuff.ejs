@@ -1,0 +1,85 @@
+<%- include('layouts/header') %>
+
+<div class="container px-5 my-5">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <h1>Editar Piezas (<%= stuff.name %>)</h1>
+        <form
+            id="add-form"
+            action="/update/<%= stuff._id %>"
+            method="post"
+            enctype="multipart/form-data"
+        >
+            <div class="mb-3">
+            <label class="form-label" for="code">Codigo</label>
+            <input
+                class="form-control"
+                value="<%= stuff.code %>"
+                name="code"
+                type="text"
+                placeholder="Codigo"
+            />
+            </div>
+            <div class="mb-3">
+            <label class="form-label" for="name">Nombre</label>
+            <input
+                class="form-control"
+                value="<%= stuff.name %>"
+                name="name"
+                type="text"
+                placeholder="Name"
+            />
+            </div>
+            <div class="mb-3">
+            <label class="form-label" for="description">Descripcion del articulo</label>
+            <input
+                class="form-control"
+                value="<%= stuff.description %>"
+                name="description"
+                type="text"
+                placeholder="Descripcion"
+            />
+            </div>
+            <div class="mb-3">
+            <label class="form-label" for="amount">Cantidad disponible en Almacen</label>
+            <input
+                class="form-control"
+                value="<%= stuff.amount %>"
+                name="amount"
+                type="text"
+                placeholder="Cantidad"
+            />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="price">Precio</label>
+                <input
+                    class="form-control"
+                    value="<%= stuff.price %>"
+                    name="price"
+                    type="text"
+                    placeholder="Precio"
+                />
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Foto del articulo</label>
+            <input name="image" class="form-control" type="file"/>
+            <img src="/<%= stuff.image %>" width="100" class="img-thumbnail mt-1">
+            </div>
+
+            <input type="hidden" name="old_image" value="<%= stuff.image %>">
+
+            <div class="d-grid">
+            <input
+                type="submit"
+                class="btn btn-primary btn-lg"
+                value="Editar Pieza"
+            />
+            </div>
+        </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+<%- include('layouts/footer') %>
