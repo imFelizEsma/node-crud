@@ -68,6 +68,10 @@ router.get('/edit/:id', async (req, res) => {
         const stuff = await Stuff.findById(id);
 
         if(stuff == null) {
+            req.session.message = {
+                type: 'success',
+                message: 'No exite pieza con ese id. Introduzca un id valido!'
+            };
             res.redirect('/');
         }else{
             res.render('editstuff', {titulo: 'Editar Piezas', stuff: stuff});
